@@ -1,0 +1,118 @@
+" This must be first, because it changes other options as side effect
+set nocompatible
+
+" Pathogen setup
+call pathogen#infect()
+call pathogen#helptags()
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+
+" Setting line number
+set number
+
+" don't wrap lines
+set nowrap
+
+" a tab is four spaces
+set tabstop=4
+
+" allows backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+" always set autoindenting on
+set autoindent
+
+" copy the previous indentation on autoindenting
+set copyindent
+
+" always show line numbers
+set number
+
+" number of spaces to be used for autoindenting
+set shiftwidth=4
+
+" use multiole of shiftwidth when indenting with '<' and '>'
+set shiftround
+
+" show matching paranthesis
+set showmatch
+
+" ignore case while searching
+set ignorecase
+
+" ignore case if search patter in all lowercase, case-sensitive otherwise.
+set smartcase
+
+" insert tabs on the start of a line according to shiftwidth, not tabstop
+set smarttab
+
+" highlight search terms
+set hlsearch
+
+" incremental search
+set incsearch
+
+" filetype indenting
+filetype plugin indent on
+autocmd filetype python set expandtab
+
+" setting pastetoggle
+set pastetoggle=<F2>
+
+" enabling mouse
+set mouse=a
+
+" mapping ; to :
+nnoremap ; :
+
+" show the command being typed, even if it uses the leader key
+set showcmd
+
+" mapping the arrow keys to nop
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+" Easy window navigation
+" map <C-h> <C-w>h
+" map <C-j> <C-w>j
+" map <C-k> <C-w>k
+" map <C-l> <C-w>l
+
+" clear hilighted searches
+nmap <silent> ,/ :nohlsearch<CR>
+
+
+" syntax highlighting.
+if &t_Co >= 256 || has("gui_running")
+   colorscheme mustang
+endif
+
+if &t_Co > 2 || has("gui_running")
+   " switch syntax highlighting on, when the terminal has colors
+   syntax on
+endif
+"  ********************************  History stuff
+
+" remember a lot more commands
+set history=10000
+
+" use many levels of undo
+set undolevels=10000
+
+set wildignore=*.swp,*.bak,*.bckp,*.pyc,*.class
+
+" change the terminal's title
+set title
+
+" don't beep
+set visualbell
+set noerrorbells
+
+" No backup files
+set nobackup
+set noswapfile
