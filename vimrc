@@ -166,7 +166,7 @@ au FocusLost * :wa
 
 " syntax highlighting.
 if &t_Co >= 256 || has("gui_running")
-   colorscheme mustang
+   colorscheme vividchalk
 endif
 
 if &t_Co > 2 || has("gui_running")
@@ -193,6 +193,7 @@ set noerrorbells
 " No backup files
 set nobackup
 set noswapfile
+set nowritebackup 
 
 " window behaviour.
 set winminheight=0      " Allow windows to get fully squashed
@@ -220,3 +221,11 @@ autocmd BufReadPost *
 " setting wordwrap 
 set formatoptions+=l
 set lbr
+
+" Setting some shortcut
+noremap <leader>tg :CommandT ~/git/<CR>
+noremap <leader>th :CommandT ~<CR>
+noremap <leader>ts :CommandT ~/git/system-config/<CR>
+
+" status line . From the peepcode vim screencast
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
