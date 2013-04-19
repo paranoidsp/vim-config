@@ -189,17 +189,35 @@ set listchars=tab:▸\ ,eol:¬
 " save on losing focus
 au FocusLost * :wa
 
-" syntax highlighting.
-if &t_Co >= 256 || has("gui_running")
-   colorscheme vividchalk
-"else
-    "colorscheme mustang
+if has('gui_running')
+    set background=light
+else
+    set background=dark
 endif
 
 if &t_Co > 2 || has("gui_running")
    " switch syntax highlighting on, when the terminal has colors
    syntax on
 endif
+
+" syntax highlighting.
+if &t_Co >= 256 || has("gui_running")
+   "colorscheme vividchalk
+   "colorscheme blackboard
+   colorscheme solarized 
+else
+    "colorscheme mustang
+"export TERM="xterm-256color"
+    "colorscheme solarized
+endif
+
+let g:solarized_termtrans=1
+"set background=dark
+"let g:solarized_termtrans=1
+"let g:solarized_termcolors=256
+"let g:solarized_contrast="high"
+"let g:solarized_visibility="high"
+colorscheme solarized
 
 " The PC is fast enough, do syntax highlight syncing from start
 "autocmd BufEnter * :syntax sync fromstart
@@ -296,3 +314,44 @@ set ttyfast
 " NERDtree on <leader>n
 nnoremap <leader>n :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
+
+" Set tabstop, softtabstop and shiftwidth to the same value
+command! -nargs=* Stab call Stab()
+function! Stab()
+  let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
+  if l:tabstop > 0
+    let &l:sts = l:tabstop
+    let &l:ts = l:tabstop
+    let &l:sw = l:tabstop
+  endif
+  call SummarizeTabs()
+endfunction
+  
+function! SummarizeTabs()
+  try
+    echohl ModeMsg
+    echon 'tabstop='.&l:ts
+    echon ' shiftwidth='.&l:sw
+    echon ' softtabstop='.&l:sts
+    if &l:et
+      echon ' expandtab'
+    else
+      echon ' noexpandtab'
+    endif
+  finally
+    echohl None
+  endtry
+endfunction
+
+" Powerline setup
+"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+if &t_Co >= 256 || has("gui_running")
+    let g:Powerline_symbols = 'fancy'
+endif
+
+" mapping to toggle lists
+nmap <leader>l :set list!<CR>
+
+" Map ,e to esc
+vnoremap <leader>e <ESC><ESC>
+
