@@ -11,6 +11,18 @@ call pathogen#helptags()
 syntax on
 filetype plugin indent on
 
+" Hide mouse pointer while typing
+set mousehide
+set mousemodel=popup
+
+" Better modes.  Remeber where we are, support yankring
+set viminfo=!,'100,\"100,:20,<50,s10,h,n~/.viminfo
+
+" Code Folding, everything folded by default
+set foldmethod=indent
+set foldlevel=99
+set foldenable
+
 " Remove modelines
 set modelines=0
 
@@ -36,8 +48,10 @@ nnoremap <leader>a :Ack
 " sets every line number to be relative to the present. Maybe useful
 set relativenumber
 
-" creates an .un file to save the undo changes for later. Extremely useful
+" Set persistent undo (v7.3 only)
+set undodir=~/.vim/undodir
 set undofile
+" creates an .un file to save the undo changes for later. Extremely useful
 
 " use normal regexes
 noremap / /\v
@@ -131,6 +145,17 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+" Left/Right arrow keys change buffers in all modes
+noremap <Left> <Esc>:bp<CR>
+inoremap <Left> <Esc>:bp<CR>
+nnoremap <Left> <Esc>:bp<CR>
+vnoremap <Left> <Esc>:bp<CR>
+
+noremap <Right> <Esc>:bn<CR>
+inoremap <Right> <Esc>:bn<CR>
+nnoremap <Right> <Esc>:bn<CR>
+vnoremap <Right> <Esc>:bn<CR>
+
 " settinc copy paste
 nmap <C-V> "+gP
 imap <C-V> <ESC><C-V>a
@@ -167,12 +192,19 @@ au FocusLost * :wa
 " syntax highlighting.
 if &t_Co >= 256 || has("gui_running")
    colorscheme vividchalk
+"else
+    "colorscheme mustang
 endif
 
 if &t_Co > 2 || has("gui_running")
    " switch syntax highlighting on, when the terminal has colors
    syntax on
 endif
+
+" The PC is fast enough, do syntax highlight syncing from start
+"autocmd BufEnter * :syntax sync fromstart
+
+
 "  ********************************  History stuff
 
 " remember a lot more commands
@@ -223,9 +255,44 @@ set formatoptions+=l
 set lbr
 
 " Setting some shortcut
-noremap <leader>tg :CommandT ~/git/<CR>
-noremap <leader>th :CommandT ~<CR>
-noremap <leader>ts :CommandT ~/git/system-config/<CR>
+nnoremap <leader>tg :CommandT ~/git/<CR>
+nnoremap <leader>th :CommandT ~<CR>
+nnoremap <leader>ts :CommandT ~/git/system-config/<CR>
+nnoremap <leader>m <Esc>:CommandTBuffer<CR>
+
+function! CWD()
+    let curdir = substitute(getcwd(), '/home/mnazim', "~/", "g")
+    return curdir
+endfunction
 
 " status line . From the peepcode vim screencast
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+"set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+" From mnazim
+set statusline=[%l,%v\ %P%M][CWD:\ %{CWD()}][FILE:\ %f]\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}\ %#warningmsg#%{SyntasticStatuslineFlag()}%*
+
+" Adding keybinding for gundo
+nnoremap <F5> :GundoToggle<CR>
+
+" Supertab config
+let g:SuperTabDefaultCompletionType = "context"
+
+" Disabling toolbar and scrollbar
+set guioptions-=T
+set guioptions-=r
+
+" Disable the stupid pydoc preview window for the omni completion
+set completeopt-=preview
+
+" Disable the blinking cursor.
+set gcr=a:blinkon0
+
+" Highlight current line 
+if has("gui_running")
+  set cursorline
+endif
+
+set ttyfast
+
+" NERDtree on <leader>n
+nnoremap <leader>n :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
