@@ -46,7 +46,8 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <leader>a :Ack
 
 " sets every line number to be relative to the present. Maybe useful
-set relativenumber
+"set relativenumber
+set number
 
 " Set persistent undo (v7.3 only)
 set undodir=~/.vim/undodir
@@ -73,7 +74,10 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 inoremap jj <ESC>
 
 " Setting line number
-set number
+"set number
+
+"# Toggle line numbers and fold column for easy copying:
+"nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 
 " don't jwrap lines
 " set nowrap
@@ -94,7 +98,7 @@ set autoindent
 set copyindent
 
 " always show line numbers
-set number
+"set number
 
 " number of spaces to be used for autoindenting
 set shiftwidth=4
