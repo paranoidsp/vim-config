@@ -359,3 +359,7 @@ nmap <leader>l :set list!<CR>
 " Map ,e to esc
 vnoremap <leader>e <ESC><ESC>
 
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
