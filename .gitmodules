@@ -100,3 +100,6 @@
 [submodule "vim/bundle/rainbow_parantheses"]
 	path = vim/bundle/rainbow_parantheses
 	url = https://github.com/kien/rainbow_parentheses.vim.git
+[submodule "vim/bundle/vim-obsession"]
+	path = vim/bundle/vim-obsession
+	url = git@github.com:tpope/vim-obsession.git
