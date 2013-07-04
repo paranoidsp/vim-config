@@ -59,7 +59,7 @@ noremap / /\v
 vnoremap / /\v
 
 " apply substitutions globally by default
-set gdefault
+"set gdefault
 
 
 " map leader key to something more usable
@@ -262,7 +262,7 @@ map <C-K> <C-W>k<C-W>_
 nnoremap <leader>w <C-w>v<C-w>l 
 
 " create new vertical split and move to it
-nnoremap <leader>w <C-w>v<C-w>l
+"nnoremap <leader>w <C-w>v<C-w>l
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
@@ -281,6 +281,7 @@ nnoremap <leader>tg :CommandT ~/git/<CR>
 nnoremap <leader>th :CommandT ~<CR>
 nnoremap <leader>ts :CommandT ~/git/system-config/<CR>
 nnoremap <leader>m <Esc>:CommandTBuffer<CR>
+nnoremap <leader>t <Esc>:Rooter<CR><Esc>:CommandT<CR>
 
 function! CWD()
     let curdir = substitute(getcwd(), '/home/mnazim', "~/", "g")
@@ -363,3 +364,42 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+set ssop-=options    " do not store global and local values in a session
+set ssop-=folds      " do not store folds
+
+" Automatic save/load sessions
+function! MakeSession()
+  let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+  if (filewritable(b:sessiondir) != 2)
+    exe 'silent !mkdir -p ' b:sessiondir
+    redraw!
+  endif
+  let b:filename = b:sessiondir . '/session.vim'
+  exe "mksession! " . b:filename
+endfunction
+
+function! LoadSession()
+  let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+  let b:sessionfile = b:sessiondir . "/session.vim"
+  if (filereadable(b:sessionfile))
+    exe 'source ' b:sessionfile
+  else
+    echo "No session loaded."
+  endif
+endfunction
+au VimEnter * nested :call LoadSession()
+au VimLeave * :call MakeSession()
+
+" tab navigation like firefox
+nnoremap <C-S-tab> :tabprevious<CR>
+nnoremap <C-tab>   :tabnext<CR>
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-S-tab> <Esc>:tabprevious<CR>i
+inoremap <C-tab>   <Esc>:tabnext<CR>i
+inoremap <C-t>     <Esc>:tabnew<CR>
+
+" Insert new line without entering insert mode.
+map <S-Enter> O<Esc>j
+map <CR> o<Esc>k
+

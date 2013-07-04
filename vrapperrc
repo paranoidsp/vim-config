@@ -1,0 +1,21 @@
+set visualmouse
+
+set globalregisters
+
+set ignorecase
+set smartcase
+set regexsearch
+set hlsearch
+set incsearch
+
+set sanecw
+
+set autochdir
+
+ino jj <ESC>
+nnoremap ; :
+noremap <tab> %
+
+" Insert new line without entering insert mode.
+map <S-Enter> O<Esc>j
+map <CR> o<Esc>k
