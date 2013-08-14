@@ -86,7 +86,7 @@ inoremap jj <ESC>
 set tabstop=4
 
 " save on losing focus
-au FocusLost * :wa
+"au FocusLost * :wa
 
 " allows backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -187,11 +187,11 @@ set formatoptions=qrnl
 set colorcolumn=85
 
 " show invisible chars
-set list
+"set list
 set listchars=tab:▸\ ,eol:¬
 
 " save on losing focus
-au FocusLost * :wa
+"au FocusLost * :wa
 
 if has('gui_running')
     set background=light
@@ -205,11 +205,12 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 " syntax highlighting.
-if &t_Co >= 256 || has("gui_running")
+if has("gui_running")
    "colorscheme vividchalk
    "colorscheme blackboard
    colorscheme solarized 
 else
+    colorscheme koehler
     "colorscheme mustang
 "export TERM="xterm-256color"
     "colorscheme solarized
@@ -226,11 +227,14 @@ colorscheme solarized
 " The PC is fast enough, do syntax highlight syncing from start
 "autocmd BufEnter * :syntax sync fromstart
 
+" Automatically load files if they are changed on the disk.
+" Does nothing if the file is deleted.
+set autoread
 
 "  ********************************  History stuff
 
 " remember a lot more commands
-set history=10000
+set history=100000
 
 " use many levels of undo
 set undolevels=10000
@@ -262,6 +266,7 @@ map <C-K> <C-W>k<C-W>_
 nnoremap <leader>w <C-w>v<C-w>l 
 
 " create new vertical split and move to it
+"
 "nnoremap <leader>w <C-w>v<C-w>l
 
 " When editing a file, always jump to the last known cursor position.
@@ -276,12 +281,17 @@ autocmd BufReadPost *
 set formatoptions+=l
 set lbr
 
-" Setting some shortcut
+" Setting some shortcuts
 nnoremap <leader>tg :CommandT ~/git/<CR>
 nnoremap <leader>th :CommandT ~<CR>
 nnoremap <leader>ts :CommandT ~/git/system-config/<CR>
+nnoremap <leader>tj :CommandT ~/git/lit/journal/<CR>
 nnoremap <leader>m <Esc>:CommandTBuffer<CR>
 nnoremap <leader>t <Esc>:Rooter<CR><Esc>:CommandT<CR>
+let g:CommandTMaxFiles=200000
+let g:CommandTMaxCachedDirectories=0
+let g:CommandTScanDotDirectories=1
+let g:CommandTMaxDepth=30
 
 function! CWD()
     let curdir = substitute(getcwd(), '/home/mnazim', "~/", "g")
@@ -355,7 +365,7 @@ if &t_Co >= 256 || has("gui_running")
 endif
 
 " mapping to toggle lists
-nmap <leader>l :set list!<CR>
+nmap <leader>l :set list<CR>
 
 " Map ,e to esc
 vnoremap <leader>e <ESC><ESC>
@@ -368,28 +378,28 @@ au Syntax * RainbowParenthesesLoadBraces
 set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
 
-" Automatic save/load sessions
-function! MakeSession()
-  let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
-  if (filewritable(b:sessiondir) != 2)
-    exe 'silent !mkdir -p ' b:sessiondir
-    redraw!
-  endif
-  let b:filename = b:sessiondir . '/session.vim'
-  exe "mksession! " . b:filename
-endfunction
+"" Automatic save/load sessions
+"function! MakeSession()
+  "let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+  "if (filewritable(b:sessiondir) != 2)
+    "exe 'silent !mkdir -p ' b:sessiondir
+    "redraw!
+  "endif
+  "let b:filename = b:sessiondir . '/session.vim'
+  "exe "mksession! " . b:filename
+"endfunction
 
-function! LoadSession()
-  let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
-  let b:sessionfile = b:sessiondir . "/session.vim"
-  if (filereadable(b:sessionfile))
-    exe 'source ' b:sessionfile
-  else
-    echo "No session loaded."
-  endif
-endfunction
-au VimEnter * nested :call LoadSession()
-au VimLeave * :call MakeSession()
+"function! LoadSession()
+  "let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+  "let b:sessionfile = b:sessiondir . "/session.vim"
+  "if (filereadable(b:sessionfile))
+    "exe 'source ' b:sessionfile
+  "else
+    "echo "No session loaded."
+  "endif
+"endfunction
+"au VimEnter * nested :call LoadSession()
+"au VimLeave * :call MakeSession()
 
 " tab navigation like firefox
 nnoremap <C-S-tab> :tabprevious<CR>
