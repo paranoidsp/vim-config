@@ -413,3 +413,5 @@ inoremap <C-t>     <Esc>:tabnew<CR>
 map <S-Enter> O<Esc>j
 map <CR> o<Esc>k
 
+" Insert semicolon at the end of the line
+inoremap <leader>cl <Esc>A;<Esc>
