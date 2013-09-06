@@ -11,6 +11,9 @@ call pathogen#helptags()
 syntax on
 filetype plugin indent on
 
+" Let modified buffers be hidden when abandoned.
+set hidden
+
 " Hide mouse pointer while typing
 set mousehide
 set mousemodel=popup
@@ -208,7 +211,7 @@ endif
 if has("gui_running")
    "colorscheme vividchalk
    "colorscheme blackboard
-   colorscheme solarized 
+   colorscheme base16-default 
 else
     colorscheme koehler
     "colorscheme mustang
@@ -217,12 +220,12 @@ else
 endif
 
 let g:solarized_termtrans=1
-"set background=dark
+set background=dark
 "let g:solarized_termtrans=1
 "let g:solarized_termcolors=256
 "let g:solarized_contrast="high"
 "let g:solarized_visibility="high"
-colorscheme solarized
+"colorscheme solarized
 
 " The PC is fast enough, do syntax highlight syncing from start
 "autocmd BufEnter * :syntax sync fromstart
@@ -309,8 +312,9 @@ nnoremap <F5> :GundoToggle<CR>
 " Supertab config
 let g:SuperTabDefaultCompletionType = "context"
 
-" Disabling toolbar and scrollbar
+" Disabling toolbar and scrollbar and the menubar
 set guioptions-=T
+set guioptions-=m
 set guioptions-=r
 
 " Disable the stupid pydoc preview window for the omni completion
@@ -405,6 +409,7 @@ set ssop-=folds      " do not store folds
 nnoremap <C-S-tab> :tabprevious<CR>
 nnoremap <C-tab>   :tabnext<CR>
 nnoremap <C-t>     :tabnew<CR>
+nnoremap <leader>ct :tabclose<CR>
 inoremap <C-S-tab> <Esc>:tabprevious<CR>i
 inoremap <C-tab>   <Esc>:tabnext<CR>i
 inoremap <C-t>     <Esc>:tabnew<CR>
@@ -415,3 +420,10 @@ map <CR> o<Esc>k
 
 " Insert semicolon at the end of the line
 inoremap <leader>cl <Esc>A;<Esc>
+noremap <leader>cl <Esc>A;<Esc>
+
+" Mapping for rooter.
+nnoremap <leader>r :Rooter<CR>
+
+" Telling vim not to worry, I use two spaces.
+set cpo+=J
