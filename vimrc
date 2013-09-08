@@ -211,9 +211,10 @@ endif
 if has("gui_running")
    "colorscheme vividchalk
    "colorscheme blackboard
-   colorscheme base16-default 
+   "colorscheme base16-default 
+   colorscheme badwolf
 else
-    colorscheme koehler
+    colorscheme badwolf
     "colorscheme mustang
 "export TERM="xterm-256color"
     "colorscheme solarized
@@ -226,6 +227,12 @@ set background=dark
 "let g:solarized_contrast="high"
 "let g:solarized_visibility="high"
 "colorscheme solarized
+
+
+" Customizing badwolf theme
+let g:badwolf_darkgutter = 1
+" Make the tab line darker than the background.
+let g:badwolf_tabline = 0
 
 " The PC is fast enough, do syntax highlight syncing from start
 "autocmd BufEnter * :syntax sync fromstart
