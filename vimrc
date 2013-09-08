@@ -323,6 +323,7 @@ let g:SuperTabDefaultCompletionType = "context"
 set guioptions-=T
 set guioptions-=m
 set guioptions-=r
+set go-=L
 
 " Disable the stupid pydoc preview window for the omni completion
 set completeopt-=preview
@@ -434,3 +435,4 @@ nnoremap <leader>r :Rooter<CR>
 
 " Telling vim not to worry, I use two spaces.
 set cpo+=J
+
