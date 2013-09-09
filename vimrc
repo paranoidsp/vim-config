@@ -436,3 +436,5 @@ nnoremap <leader>r :Rooter<CR>
 " Telling vim not to worry, I use two spaces.
 set cpo+=J
 
+nnoremap <leader>cm <Esc>:colorscheme monokai<CR>
+nnoremap <leader>cb <Esc>:colorscheme badwolf<CR>
