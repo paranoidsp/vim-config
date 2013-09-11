@@ -72,6 +72,7 @@ let mapleader=","
 " nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+nnoremap <leader>ej <C-w><C-v><C-l>:!gvims $journal<cr>
 
 " mapping jj to esc
 inoremap jj <ESC>
@@ -311,7 +312,7 @@ endfunction
 " status line . From the peepcode vim screencast
 "set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 " From mnazim
-set statusline=[%l,%v\ %P%M][CWD:\ %{CWD()}][FILE:\ %f]\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}\ %#warningmsg#%{SyntasticStatuslineFlag()}%*
+"set statusline=[%l,%v\ %P%M][CWD:\ %{CWD()}][FILE:\ %f]\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}\ %#warningmsg#%{SyntasticStatuslineFlag()}%*
 
 " Adding keybinding for gundo
 nnoremap <F5> :GundoToggle<CR>
@@ -370,11 +371,6 @@ function! SummarizeTabs()
   endtry
 endfunction
 
-" Powerline setup
-"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-if &t_Co >= 256 || has("gui_running")
-    let g:Powerline_symbols = 'fancy'
-endif
 
 " mapping to toggle lists
 nmap <leader>l :set list<CR>
@@ -416,11 +412,11 @@ set ssop-=folds      " do not store folds
 " tab navigation like firefox
 nnoremap <C-S-tab> :tabprevious<CR>
 nnoremap <C-tab>   :tabnext<CR>
-nnoremap <C-t>     :tabnew<CR>
+"nnoremap <C-t>     :tabnew<CR>
 nnoremap <leader>ct :tabclose<CR>
 inoremap <C-S-tab> <Esc>:tabprevious<CR>i
 inoremap <C-tab>   <Esc>:tabnext<CR>i
-inoremap <C-t>     <Esc>:tabnew<CR>
+"inoremap <C-t>     <Esc>:tabnew<CR>
 
 " Insert new line without entering insert mode.
 map <S-Enter> O<Esc>j
@@ -438,3 +434,30 @@ set cpo+=J
 
 nnoremap <leader>cm <Esc>:colorscheme monokai<CR>
 nnoremap <leader>cb <Esc>:colorscheme badwolf<CR>
+
+" Setting font. The best font ever.
+set guifont=Inconsolata\ Medium\ 12 
+"
+" Powerline setup
+"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+if &t_Co >= 256 || has("gui_running")
+    let g:Powerline_symbols = 'fancy'
+endif
+
+" Insert the hours and minutes in 24- hour format for the journal
+"nnoremap <C-t> <Esc>:r! date +\%H\%M\%S<CR>A:<CR><Tab>
+"inoremap <C-t> <Esc>:r! date +\%H\%M\%S<CR>A:<CR><Tab>
+
+" Insert the time at the beginning of each line. Only for the journal.
+" Uncomment to map. 
+"inoremap <CR> <Esc>:r! date +\%H\%M\%S<CR>A: \|  <Esc>i
+" Uncomment and apply the below to return to normal.
+"inoremap <CR> <CR>
+
+" If servername is journal, set the margin scheme.
+"
+"if v:servername == "journal"
+    "inoremap <CR> <Esc>:r! date +\%H\%M\%S<CR>A: \|  <Esc>i
+"endif
+
+autocmd BufNewFile,BufRead *.journal inoremap <buffer> <CR> <Esc>:r! date +\%H\%M<CR>A: \|<Tab>  <Esc>i
