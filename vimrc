@@ -460,4 +460,7 @@ endif
     "inoremap <CR> <Esc>:r! date +\%H\%M\%S<CR>A: \|  <Esc>i
 "endif
 
-autocmd BufNewFile,BufRead *.journal inoremap <buffer> <CR> <Esc>:r! date +\%H\%M<CR>A: \|<Tab>  <Esc>i
+autocmd BufNewFile,BufRead *.journal inoremap <buffer> <CR> <Esc>:r! date +\%H\%M<CR>A: \|    <Esc>i
+
+"Markdown to HTML  
+nnoremap <leader>md :%!Markdown.pl --html4tags <cr>
