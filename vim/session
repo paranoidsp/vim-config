@@ -1,0 +1,91 @@
+let SessionLoad = 1
+if &cp | set nocp | endif
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let v:this_session=expand("<sfile>:p")
+silent only
+cd /media/data/git/saarang/landing_reg
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+set shortmess=aoO
+badd +7 reg.html
+badd +1 /media/data/git/lit/journal/2013-09-24.journal
+badd +12 config.php
+badd +9 register.php
+badd +1 sales.php
+badd +15 user_details.sql
+badd +414 ~/.vimrc
+badd +1 NERD_tree_1
+args user_details.sql
+edit reg.html
+set splitbelow splitright
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+exe '1resize ' . ((&lines * 36 + 19) / 39)
+exe '2resize ' . ((&lines * 0 + 19) / 39)
+argglobal
+enew
+file -MiniBufExplorer-
+wincmd w
+argglobal
+let s:l = 8 - ((1 * winheight(0) + 0) / 0)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+8
+normal! 0
+wincmd w
+2wincmd w
+exe '1resize ' . ((&lines * 36 + 19) / 39)
+exe '2resize ' . ((&lines * 0 + 19) / 39)
+tabedit ~/.vimrc
+set splitbelow splitright
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+exe '1resize ' . ((&lines * 2 + 19) / 39)
+exe 'vert 1resize ' . ((&columns * 151 + 85) / 170)
+exe '2resize ' . ((&lines * 33 + 19) / 39)
+exe 'vert 2resize ' . ((&columns * 151 + 85) / 170)
+argglobal
+enew
+wincmd w
+argglobal
+let s:l = 414 - ((0 * winheight(0) + 16) / 33)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+414
+normal! 013|
+wincmd w
+2wincmd w
+exe '1resize ' . ((&lines * 2 + 19) / 39)
+exe 'vert 1resize ' . ((&columns * 151 + 85) / 170)
+exe '2resize ' . ((&lines * 33 + 19) / 39)
+exe 'vert 2resize ' . ((&columns * 151 + 85) / 170)
+tabnext 1
+if exists('s:wipebuf')
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=1 winwidth=20 shortmess=filnxtToO
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if file_readable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+let g:this_obsession = v:this_session
+unlet SessionLoad
+" vim: set ft=vim :

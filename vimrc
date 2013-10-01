@@ -213,16 +213,11 @@ endif
 if &t_Co < 256 
     colorscheme base16-monokai
 endif
-if has("gui_running")
+if has("gui_running") || &t_Co >= 256
    "colorscheme vividchalk
    "colorscheme blackboard
    "colorscheme base16-default 
    colorscheme badwolf
-else
-    colorscheme badwolf
-    "colorscheme mustang
-"export TERM="xterm-256color"
-    "colorscheme solarized
 endif
 
 let g:solarized_termtrans=1
@@ -297,16 +292,15 @@ set formatoptions+=l
 set lbr
 
 " Setting some shortcuts
-nnoremap <leader>tg :CommandT ~/git/<CR>
-nnoremap <leader>th :CommandT ~<CR>
-nnoremap <leader>ts :CommandT ~/git/system-config/<CR>
-nnoremap <leader>tj :CommandT ~/git/lit/journal/<CR>
-nnoremap <leader>m <Esc>:CommandTBuffer<CR>
+"nnoremap <leader>tg :CommandT ~/git/<CR>
+"nnoremap <leader>th :CommandT ~<CR>
+"nnoremap <leader>ts :CommandT ~/git/system-config/<CR> nnoremap <leader>tj :CommandT ~/git/lit/journal/<CR>
+"nnoremap <leader>m <Esc>:CommandTBuffer<CR>
 nnoremap <leader>t <Esc>:Rooter<CR><Esc>:CommandT<CR>
-let g:CommandTMaxFiles=200000
-let g:CommandTMaxCachedDirectories=0
-let g:CommandTScanDotDirectories=1
-let g:CommandTMaxDepth=30
+"let g:CommandTMaxFiles=200000
+"let g:CommandTMaxCachedDirectories=0
+"let g:CommandTScanDotDirectories=1
+"let g:CommandTMaxDepth=30
 
 function! CWD()
     let curdir = substitute(getcwd(), '/home/mnazim', "~/", "g")
@@ -345,6 +339,7 @@ set ttyfast
 
 " NERDtree on <leader>n
 nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>m :NERDTree<CR>
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
 
 " Set tabstop, softtabstop and shiftwidth to the same value
@@ -416,19 +411,21 @@ set ssop-=folds      " do not store folds
 " tab navigation like firefox
 nnoremap <C-S-tab> :tabprevious<CR>
 nnoremap <C-tab>   :tabnext<CR>
-"nnoremap <C-t>     :tabnew<CR>
+nnoremap <C-t>     :tabnew<CR>
 nnoremap <leader>ct :tabclose<CR>
 inoremap <C-S-tab> <Esc>:tabprevious<CR>i
 inoremap <C-tab>   <Esc>:tabnext<CR>i
-"inoremap <C-t>     <Esc>:tabnew<CR>
+inoremap <C-t>     <Esc>:tabnew<CR>
+"let g:miniBufExplMapCTabSwitchWindows = 1
+" The above sets C-tab and C-S-Tab to shift tabs.
 
 " Insert new line without entering insert mode.
 map <S-Enter> O<Esc>j
 map <CR> o<Esc>k
 
 " Insert semicolon at the end of the line
-inoremap <leader>cl <Esc>A;<Esc>
-noremap <leader>cl <Esc>A;<Esc>
+inoremap <leader>cl <Esc>A;<Esc>o
+noremap <leader>cl <Esc>A;<Esc>o
 
 " Mapping for rooter.
 nnoremap <leader>r :Rooter<CR>
@@ -440,7 +437,7 @@ nnoremap <leader>cm <Esc>:colorscheme monokai<CR>
 nnoremap <leader>cb <Esc>:colorscheme badwolf<CR>
 
 " Setting font. The best font ever.
-set guifont=Inconsolata\ Medium\ 12 
+set guifont=Inconsolata\ Medium\ 12
 "
 " Powerline setup
 "set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
@@ -471,7 +468,7 @@ nnoremap <leader>md :%!Markdown.pl --html4tags <cr>
 
 
 " Ctrlp mappings.
-let g:ctrlp_map = '<c-i>'
+let g:ctrlp_map = '<leader>c'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
