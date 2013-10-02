@@ -136,3 +136,27 @@
 [submodule "vim/bundle/vim-nerdtree-tabs"]
 	path = vim/bundle/vim-nerdtree-tabs
 	url = https://github.com/jistr/vim-nerdtree-tabs.git
+[submodule "vim/bundle/gist-vim"]
+	path = vim/bundle/gist-vim
+	url = https://github.com/mattn/gist-vim.git
+[submodule "vim/bundle/vim/bundle/vimchat"]
+	path = vim/bundle/vim/bundle/vimchat
+	url = https://github.com/ironcamel/vimchat.git
+[submodule "vim/vim/bundle/vim-irblack"]
+	path = vim/vim/bundle/vim-irblack
+	url = https://github.com/wesgibbs/vim-irblack.git
+[submodule "vim/bundle/colorschemes"]
+	path = vim/bundle/colorschemes
+	url = git@github.com:flazz/vim-colorschemes.git
+[submodule "vim/bundle/vim-irblack"]
+	path = vim/bundle/vim-irblack
+	url = https://github.com/wesgibbs/vim-irblack.git
+[submodule "vim/bundle/vim-distinguished"]
+	path = vim/bundle/vim-distinguished
+	url = https://github.com/Lokaltog/vim-distinguished.git
+[submodule "vim/bundle/vimchat"]
+	path = vim/bundle/vimchat
+	url = https://github.com/ironcamel/vimchat.git
+[submodule "vim/bundle/gruvbox"]
+	path = vim/bundle/gruvbox
+	url = https://github.com/morhetz/gruvbox.git
