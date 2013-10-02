@@ -213,8 +213,10 @@ endif
 if &t_Co < 256 
     colorscheme base16-monokai
 endif
-if has("gui_running") || &t_Co >= 256
-   "colorscheme vividchalk
+if &t_Co >= 256
+    colorscheme koehler
+endif
+if has("gui_running")
    "colorscheme blackboard
    "colorscheme base16-default 
    colorscheme badwolf
