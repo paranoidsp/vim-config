@@ -74,6 +74,7 @@ let mapleader=","
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <leader>ej <C-w><C-v><C-l>:!gvims $journal<cr>
+nnoremap <leader>ea <C-w><C-v><C-l>:e ~/.config/awesome/rc.lua<cr>
 
 " mapping jj to esc
 inoremap jj <ESC>
@@ -91,7 +92,7 @@ inoremap jj <ESC>
 set tabstop=4
 
 " save on losing focus
-"au FocusLost * :wa
+au FocusLost * :wa
 
 " allows backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -252,6 +253,7 @@ set history=100000
 set undolevels=10000
 
 set wildignore=*.swp,*.bak,*.bckp,*.pyc,*.class
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 " change the terminal's title
 set title
@@ -478,6 +480,7 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 nnoremap <leader>ch <Esc>:CtrlP ~<CR>
 nnoremap <leader>cg <Esc>:CtrlP ~/git<CR>
 nnoremap <leader>cs <Esc>:CtrlP ~/git/system-config<CR>
+nnoremap <leader>u <Esc>:CtrlPMRUFiles<CR>
 
 " Mapping for save file
 nnoremap <C-s> <Esc>:w<CR>
@@ -577,3 +580,30 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+
+" Auto refresh ctrlp when filesystem changes
+" CtrlP auto cache clearing.
+" ----------------------------------------------------------------------------
+function! SetupCtrlP()
+  if exists("g:loaded_ctrlp") && g:loaded_ctrlp
+    augroup CtrlPExtension
+      autocmd!
+      autocmd FocusGained  * CtrlPClearCache
+      autocmd BufWritePost * CtrlPClearCache
+    augroup END
+  endif
+endfunction
+if has("autocmd")
+  autocmd VimEnter * :call SetupCtrlP()
+endif
+
+
+" Mapping for awesome syntax check.
+nnoremap <Leader>a <Esc>:! awesome -k<CR>
+" Mapping for save as root
+nnoremap <Leader>g <Esc>:w ! sudo tee %<CR>a<CR>L<ESC>
+
+" This is to enable the tabline.
+set guioptions-=e
+noh
