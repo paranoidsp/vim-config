@@ -74,7 +74,7 @@ let mapleader=","
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <leader>ej <C-w><C-v><C-l>:!gvims $journal<cr>
-nnoremap <leader>ea <C-w><C-v><C-l>:e ~/.config/awesome/rc.lua<cr>
+nnoremap <leader>ea <C-w><C-v><C-l>:e ~/.config/awesome/awesome-laptop/rc.lua<cr>
 
 " mapping jj to esc
 inoremap jj <ESC>
@@ -92,7 +92,7 @@ inoremap jj <ESC>
 set tabstop=4
 
 " save on losing focus
-au FocusLost * :wa
+au FocusLost * :wa!
 
 " allows backspacing over everything in insert mode
 set backspace=indent,eol,start
