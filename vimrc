@@ -600,7 +600,7 @@ endif
 
 
 " Mapping for awesome syntax check.
-nnoremap <Leader>a <Esc>:! awesome -k<CR>
+nnoremap <Leader>a <Esc>:! awesome --check ~/.config/awesome/awesome-laptop/rc.lua <CR>
 " Mapping for save as root
 nnoremap <Leader>g <Esc>:w ! sudo tee %<CR>a<CR>L<ESC>
 
