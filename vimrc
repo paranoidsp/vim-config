@@ -19,7 +19,7 @@ set mousehide
 set mousemodel=popup
 
 " Better modes.  Remeber where we are, support yankring
-set viminfo=!,'100,\"100,:20,<50,s10,h,n~/.viminfo
+set viminfo=!,'10000,\"10000,%,:200000,<5000,s5000,h,@20000,'0,r/tmp,n~/.viminfo
 let g:yankring_max_history = 1000
 
 " Code Folding, everything folded by default
