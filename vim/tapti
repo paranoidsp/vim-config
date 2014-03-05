@@ -8,6 +8,10 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
+badd +32 ~/tmpc
+badd +51 ~/names.txt
+badd +1 /media/data/git/lit/journal/2013-10-31.journal
+badd +1 /media/data/git/lit/2013-10-29.journal
 badd +11 /media/data/git/lit/journal/2013-09-30.journal
 badd +1 ~/-S
 badd +5 lib/views.py
@@ -17,13 +21,20 @@ badd +2 lib/models.py
 badd +1 lib/admin.py
 badd +1 NERD_tree_2
 args ~/-S
-edit -MiniBufExplorer-
+edit NERD_tree_2
 set splitbelow splitright
 wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+wincmd _ | wincmd |
 vsplit
 wincmd _ | wincmd |
 vsplit
-2wincmd h
+wincmd _ | wincmd |
+vsplit
+3wincmd h
+wincmd w
 wincmd w
 wincmd w
 wincmd _ | wincmd |
@@ -38,14 +49,23 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 31 + 33) / 67)
-exe 'vert 2resize ' . ((&columns * 1 + 33) / 67)
-exe '3resize ' . ((&lines * 4 + 18) / 36)
-exe 'vert 3resize ' . ((&columns * 33 + 33) / 67)
-exe '4resize ' . ((&lines * 29 + 18) / 36)
-exe 'vert 4resize ' . ((&columns * 0 + 33) / 67)
-exe '5resize ' . ((&lines * 29 + 18) / 36)
-exe 'vert 5resize ' . ((&columns * 32 + 33) / 67)
+exe '1resize ' . ((&lines * 3 + 19) / 38)
+exe '2resize ' . ((&lines * 32 + 19) / 38)
+exe 'vert 2resize ' . ((&columns * 31 + 37) / 75)
+exe '3resize ' . ((&lines * 32 + 19) / 38)
+exe 'vert 3resize ' . ((&columns * 3 + 37) / 75)
+exe '4resize ' . ((&lines * 32 + 19) / 38)
+exe 'vert 4resize ' . ((&columns * 1 + 37) / 75)
+exe '5resize ' . ((&lines * 11 + 19) / 38)
+exe 'vert 5resize ' . ((&columns * 37 + 37) / 75)
+exe '6resize ' . ((&lines * 20 + 19) / 38)
+exe 'vert 6resize ' . ((&columns * 0 + 37) / 75)
+exe '7resize ' . ((&lines * 20 + 19) / 38)
+exe 'vert 7resize ' . ((&columns * 36 + 37) / 75)
+argglobal
+enew
+file -MiniBufExplorer-
+wincmd w
 argglobal
 enew
 file NERD_tree_1
@@ -55,16 +75,13 @@ enew
 file NERD_tree_1
 wincmd w
 argglobal
-let s:l = 1 - ((0 * winheight(0) + 2) / 4)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 0
+enew
 wincmd w
 argglobal
-edit NERD_tree_2
-let s:l = 1 - ((0 * winheight(0) + 14) / 29)
+enew
+wincmd w
+argglobal
+let s:l = 1 - ((0 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -73,22 +90,27 @@ normal! 0
 wincmd w
 argglobal
 edit lib/admin.py
-let s:l = 11 - ((0 * winheight(0) + 14) / 29)
+let s:l = 11 - ((0 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 11
 normal! 0
 wincmd w
-3wincmd w
-exe 'vert 1resize ' . ((&columns * 31 + 33) / 67)
-exe 'vert 2resize ' . ((&columns * 1 + 33) / 67)
-exe '3resize ' . ((&lines * 4 + 18) / 36)
-exe 'vert 3resize ' . ((&columns * 33 + 33) / 67)
-exe '4resize ' . ((&lines * 29 + 18) / 36)
-exe 'vert 4resize ' . ((&columns * 0 + 33) / 67)
-exe '5resize ' . ((&lines * 29 + 18) / 36)
-exe 'vert 5resize ' . ((&columns * 32 + 33) / 67)
+2wincmd w
+exe '1resize ' . ((&lines * 3 + 19) / 38)
+exe '2resize ' . ((&lines * 32 + 19) / 38)
+exe 'vert 2resize ' . ((&columns * 31 + 37) / 75)
+exe '3resize ' . ((&lines * 32 + 19) / 38)
+exe 'vert 3resize ' . ((&columns * 3 + 37) / 75)
+exe '4resize ' . ((&lines * 32 + 19) / 38)
+exe 'vert 4resize ' . ((&columns * 1 + 37) / 75)
+exe '5resize ' . ((&lines * 11 + 19) / 38)
+exe 'vert 5resize ' . ((&columns * 37 + 37) / 75)
+exe '6resize ' . ((&lines * 20 + 19) / 38)
+exe 'vert 6resize ' . ((&columns * 0 + 37) / 75)
+exe '7resize ' . ((&lines * 20 + 19) / 38)
+exe 'vert 7resize ' . ((&columns * 36 + 37) / 75)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
