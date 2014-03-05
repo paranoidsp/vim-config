@@ -163,3 +163,6 @@
 [submodule "vim/bundle/vim-django"]
 	path = vim/bundle/vim-django
 	url = git@github.com:cwood/vim-django.git
+[submodule "vim/bundle/vim-bundler"]
+	path = vim/bundle/vim-bundler
+	url = git@github.com:tpope/vim-bundler.git
