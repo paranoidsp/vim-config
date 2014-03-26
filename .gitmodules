@@ -166,3 +166,15 @@
 [submodule "vim/bundle/vim-bundler"]
 	path = vim/bundle/vim-bundler
 	url = git@github.com:tpope/vim-bundler.git
+[submodule "vim/bundle/vim-ruby-doc"]
+	path = vim/bundle/vim-ruby-doc
+	url = git@github.com:lucapette/vim-ruby-doc.git
+[submodule "vim/bundle/vim-ruby"]
+	path = vim/bundle/vim-ruby
+	url = git@github.com:vim-ruby/vim-ruby.git
+[submodule "vim/bundle/vim-sparkup"]
+	path = vim/bundle/vim-sparkup
+	url = https://github.com/bingaman/vim-sparkup
+[submodule "vim/bundle/emmet-vim"]
+	path = vim/bundle/emmet-vim
+	url = git@github.com:mattn/emmet-vim.git

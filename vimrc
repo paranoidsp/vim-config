@@ -137,9 +137,8 @@ set incsearch
 " filetype indenting
 filetype plugin indent on
 autocmd filetype python set expandtab
-
 " setting pastetoggle
-set pastetoggle=<F2>
+set pastetoggle=<F3>
 
 " enabling mouse
 set mouse=a
@@ -219,7 +218,7 @@ if &t_Co < 256
     colorscheme base16-monokai
 endif
 if &t_Co >= 256
-    colorscheme koehler
+    colorscheme base16-monokai
 endif
 if has("gui_running")
    "colorscheme blackboard
@@ -443,8 +442,6 @@ nnoremap <leader>r :Rooter<CR>
 " Telling vim not to worry, I use two spaces.
 set cpo+=J
 
-nnoremap <leader>cm <Esc>:colorscheme monokai<CR>
-nnoremap <leader>cb <Esc>:colorscheme badwolf<CR>
 
 " Setting font. The best font ever.
 set guifont=Inconsolata\ Medium\ 12
@@ -632,4 +629,22 @@ vnoremap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 noh
+
+" Indent width for ruby
+autocmd filetype ruby set expandtab
+autocmd filetype ruby set tabstop=2
+autocmd filetype ruby set shiftwidth=2
+
+" ruby standard 2 spaces, always
+au BufRead,BufNewFile *.rb,*.rhtml set shiftwidth=2
+au BufRead,BufNewFile *.rb,*.rhtml set softtabstop=2 
+
+" Mappings to quickly change colorschemes
+nnoremap <leader>cm <Esc>:colorscheme monokai<CR>
+nnoremap <leader>cl <Esc>:colorscheme molokai<CR>
+nnoremap <leader>cb <Esc>:colorscheme badwolf<CR>
+
+" Sparkup execute key
+"g:sparkupExecuteMapping = '<C-d>'
+"g:sparkupExecuteMapping = '<C-d>'
 
