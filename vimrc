@@ -1,6 +1,10 @@
 " This must be first, because it changes other options as side effect
 set nocompatible
 
+"if s:is_windows
+  "" Exchange path separator.
+  "set shellslash
+"endif
 " enable extended matching for %
 runtime macros/matchit.vim
 
@@ -20,7 +24,7 @@ set mousemodel=popup
 
 " Better modes.  Remeber where we are, support yankring
 set viminfo=!,'10000,\"10000,%,:200000,<5000,s5000,h,@20000,'0,r/tmp,n~/.viminfo
-let g:yankring_max_history = 1000
+let g:yankring_max_history = 100000
 
 " Code Folding, everything folded by default
 set foldmethod=indent
@@ -92,7 +96,7 @@ inoremap jj <ESC>
 set tabstop=4
 
 " save on losing focus
-au FocusLost * :wa!
+au FocusLost * wa!
 
 " allows backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -133,9 +137,8 @@ set incsearch
 " filetype indenting
 filetype plugin indent on
 autocmd filetype python set expandtab
-
 " setting pastetoggle
-set pastetoggle=<F2>
+set pastetoggle=<F3>
 
 " enabling mouse
 set mouse=a
@@ -215,7 +218,7 @@ if &t_Co < 256
     colorscheme base16-monokai
 endif
 if &t_Co >= 256
-    colorscheme koehler
+    colorscheme base16-monokai
 endif
 if has("gui_running")
    "colorscheme blackboard
@@ -307,10 +310,10 @@ set lbr
 "let g:CommandTScanDotDirectories=1
 "let g:CommandTMaxDepth=30
 
-function! CWD()
-    let curdir = substitute(getcwd(), '/home/mnazim', "~/", "g")
-    return curdir
-endfunction
+"function! CWD()
+    "let curdir = substitute(getcwd(), '/home/mnazim', "~/", "g")
+    "return curdir
+"endfunction
 
 " status line . From the peepcode vim screencast
 "set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
@@ -327,6 +330,7 @@ let g:SuperTabDefaultCompletionType = "context"
 set guioptions-=T
 set guioptions-=m
 set guioptions-=r
+set ghr=1
 set go-=L
 
 " Disable the stupid pydoc preview window for the omni completion
@@ -344,6 +348,7 @@ set ttyfast
 
 " NERDtree on <leader>n
 nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>nc :NERDTreeTabsClose<CR>
 nnoremap <leader>m :NERDTree<CR>
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
 
@@ -416,11 +421,11 @@ set ssop-=folds      " do not store folds
 " tab navigation like firefox
 nnoremap <C-S-tab> :tabprevious<CR>
 nnoremap <C-tab>   :tabnext<CR>
-nnoremap <C-t>     :tabnew<CR>
+nnoremap <Leader>t    :tabnew<CR>
 nnoremap <leader>ct :tabclose<CR>
 inoremap <C-S-tab> <Esc>:tabprevious<CR>i
 inoremap <C-tab>   <Esc>:tabnext<CR>i
-inoremap <C-t>     <Esc>:tabnew<CR>
+inoremap <Leader>t  <Esc>:tabnew<CR>
 "let g:miniBufExplMapCTabSwitchWindows = 1
 " The above sets C-tab and C-S-Tab to shift tabs.
 
@@ -438,8 +443,6 @@ nnoremap <leader>r :Rooter<CR>
 " Telling vim not to worry, I use two spaces.
 set cpo+=J
 
-nnoremap <leader>cm <Esc>:colorscheme monokai<CR>
-nnoremap <leader>cb <Esc>:colorscheme badwolf<CR>
 
 " Setting font. The best font ever.
 set guifont=Inconsolata\ Medium\ 12
@@ -480,8 +483,12 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 "let g:ctrlp_user_command = 'find %s -type f' 
 nnoremap <leader>ch <Esc>:CtrlP ~<CR>
 nnoremap <leader>cg <Esc>:CtrlP ~/git<CR>
+nnoremap <leader>cj <Esc>:CtrlP ~/git/lit/journal<CR>
 nnoremap <leader>cs <Esc>:CtrlP ~/git/system-config<CR>
+nnoremap <leader>b <Esc>:CtrlPBuffer<CR>
 nnoremap <leader>u <Esc>:CtrlPMRUFiles<CR>
+nnoremap <leader>a <Esc>:CtrlP<CR>
+nnoremap <C-a> <Esc>:CtrlP<CR>
 
 " Mapping for save file
 nnoremap <C-s> <Esc>:w<CR>
@@ -601,10 +608,44 @@ endif
 
 
 " Mapping for awesome syntax check.
-nnoremap <Leader>a <Esc>:! awesome --check ~/.config/awesome/awesome-laptop/rc.lua <CR>
+"nnoremap <Leader>a <Esc>:! awesome --check ~/.config/awesome/awesome-laptop/rc.lua <CR>
 " Mapping for save as root
 nnoremap <Leader>g <Esc>:w ! sudo tee %<CR>a<CR>L<ESC>
 
 " This is to enable the tabline.
 set guioptions-=e
+
+" Make ctrlp load cache on startup.  This will make loading later very peaceful.
+"call ctrlp#call( Ctrlp() ~/git
+
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
 noh
+
+" Indent width for ruby
+autocmd filetype ruby set expandtab
+autocmd filetype ruby set tabstop=2
+autocmd filetype ruby set shiftwidth=2
+
+" ruby standard 2 spaces, always
+au BufRead,BufNewFile *.rb,*.rhtml set shiftwidth=2
+au BufRead,BufNewFile *.rb,*.rhtml set softtabstop=2 
+
+" Mappings to quickly change colorschemes
+nnoremap <leader>cm <Esc>:colorscheme monokai<CR>
+nnoremap <leader>cl <Esc>:colorscheme molokai<CR>
+nnoremap <leader>cb <Esc>:colorscheme badwolf<CR>
+
+" Sparkup execute key
+"g:sparkupExecuteMapping = '<C-d>'
+"g:sparkupExecuteMapping = '<C-d>'
+
