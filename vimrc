@@ -96,7 +96,7 @@ inoremap jj <ESC>
 set tabstop=4
 
 " save on losing focus
-au FocusLost * wa!
+"au FocusLost * wa!
 
 " allows backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -424,7 +424,7 @@ nnoremap <Leader>t    :tabnew<CR>
 nnoremap <leader>ct :tabclose<CR>
 inoremap <C-S-tab> <Esc>:tabprevious<CR>i
 inoremap <C-tab>   <Esc>:tabnext<CR>i
-inoremap <Leader>t  <Esc>:tabnew<CR>
+"inoremap <Leader>t  <Esc>:tabnew<CR>
 "let g:miniBufExplMapCTabSwitchWindows = 1
 " The above sets C-tab and C-S-Tab to shift tabs.
 
@@ -468,7 +468,7 @@ endif
     "inoremap <CR> <Esc>:r! date +\%H\%M\%S<CR>A: \|  <Esc>i
 "endif
 
-autocmd BufNewFile,BufRead *.journal inoremap <buffer> <CR> <Esc>:r! date +\%H\%M<CR>A: \|    <Esc>i
+autocmd BufNewFile,BufRead *.journal.md inoremap <buffer> <CR> <Esc>:r! date +\%H\%M<CR>A: \|    <Esc>i
 
 "Markdown to HTML  
 nnoremap <leader>md :%!Markdown.pl --html4tags <cr>
@@ -478,7 +478,9 @@ nnoremap <leader>md :%!Markdown.pl --html4tags <cr>
 let g:ctrlp_map = '<leader>c'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+set wildignore+=*\\vendor\\**
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$\|^vendor'
+       
 "let g:ctrlp_user_command = 'find %s -type f' 
 nnoremap <leader>ch <Esc>:CtrlP ~<CR>
 nnoremap <leader>cg <Esc>:CtrlP ~/git<CR>
@@ -648,3 +650,8 @@ nnoremap <leader>cb <Esc>:colorscheme badwolf<CR>
 "g:sparkupExecuteMapping = '<C-d>'
 "g:sparkupExecuteMapping = '<C-d>'
 
+"inoremap <c-[> <BS>
+
+" This is to swap caps with tilde.
+set tildeop
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
