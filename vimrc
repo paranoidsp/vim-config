@@ -300,10 +300,11 @@ set lbr
 
 " Setting some shortcuts
 "nnoremap <leader>tg :CommandT ~/git/<CR>
+"
 "nnoremap <leader>th :CommandT ~<CR>
 "nnoremap <leader>ts :CommandT ~/git/system-config/<CR> nnoremap <leader>tj :CommandT ~/git/lit/journal/<CR>
 "nnoremap <leader>m <Esc>:CommandTBuffer<CR>
-nnoremap <leader>y <Esc>:Rooter<CR><Esc>:CommandT<CR>
+"nnoremap <leader>t <Esc>:Rooter<CR><Esc>:CommandT<CR>
 "let g:CommandTMaxFiles=200000
 "let g:CommandTMaxCachedDirectories=0
 "let g:CommandTScanDotDirectories=1
