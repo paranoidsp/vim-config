@@ -97,6 +97,7 @@ set tabstop=4
 
 " save on losing focus
 "au FocusLost * wa!
+:au FocusLost * silent! wa
 
 " allows backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -656,3 +657,10 @@ nnoremap <leader>cb <Esc>:colorscheme badwolf<CR>
 " This is to swap caps with tilde.
 set tildeop
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Autosave journal files.
+autocmd BufNewFile,BufReadPost *.md let g:auto_save=1
+" Not sure if it's right, but will check and edit later.
+
+" Comment boxes.
+map ,co O#=========================================================================<CR>#<CR>#========================================================================<Esc>100\|Dkk100\|DjA 
