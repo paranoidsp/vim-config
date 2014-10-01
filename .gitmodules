@@ -49,9 +49,6 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule "vim/bundle/tasklist"]
-	path = vim/bundle/tasklist
-	url = https://github.com/vim-scripts/TaskList.vim.git
 [submodule "vim/bundle/tlib_vim"]
 	path = vim/bundle/tlib_vim
 	url = https://github.com/tomtom/tlib_vim.git
