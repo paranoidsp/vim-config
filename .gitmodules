@@ -43,9 +43,6 @@
 [submodule "vim/bundle/py.test"]
 	path = vim/bundle/py.test
 	url = https://github.com/vim-scripts/pytest.vim.git
-[submodule "vim/bundle/rope-vim"]
-	path = vim/bundle/rope-vim
-	url = https://github.com/sontek/rope-vim.git
 [submodule "vim/bundle/supertab"]
 	path = vim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
