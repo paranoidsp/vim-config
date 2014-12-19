@@ -216,10 +216,10 @@ endif
 
 " syntax highlighting.
 if &t_Co < 256 
-    colorscheme base16-monokai
+    colorscheme solarized
 endif
 if &t_Co >= 256
-    colorscheme base16-monokai
+    colorscheme solarized
 endif
 if has("gui_running")
    "colorscheme blackboard
@@ -647,6 +647,9 @@ au BufRead,BufNewFile *.rb,*.rhtml set softtabstop=2
 nnoremap <leader>cm <Esc>:colorscheme monokai<CR>
 nnoremap <leader>cl <Esc>:colorscheme molokai<CR>
 nnoremap <leader>cb <Esc>:colorscheme badwolf<CR>
+nnoremap <leader>cs <Esc>:colorscheme solarized<CR>
+nnoremap <leader>csd <Esc>:set background=dark<CR>
+nnoremap <leader>csl <Esc>:set background=light<CR>
 
 " Sparkup execute key
 "g:sparkupExecuteMapping = '<C-d>'
