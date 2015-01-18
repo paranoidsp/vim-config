@@ -1,5 +1,7 @@
 " This must be first, because it changes other options as side effect
 set nocompatible
+set encoding=utf-8
+set ambiwidth=single
 
 "if s:is_windows
   "" Exchange path separator.
@@ -76,6 +78,9 @@ let mapleader=","
 " Quickly edit/reload the vimrc file
 " nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
+autocmd! BufWritePost vimrc :source ~/.vimrc
+
+" This is to automatically update vimrc when it is edited.
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <leader>ej <C-w><C-v><C-l>:!gvims $journal<cr>
 nnoremap <leader>ea <C-w><C-v><C-l>:e ~/.config/awesome/awesome-laptop/rc.lua<cr>
@@ -335,7 +340,7 @@ set ghr=1
 set go-=L
 
 " Disable the stupid pydoc preview window for the omni completion
-set completeopt-=preview
+"set completeopt-=preview
 
 " Disable the blinking cursor.
 set gcr=a:blinkon0
@@ -446,13 +451,8 @@ set cpo+=J
 
 
 " Setting font. The best font ever.
-set guifont=Inconsolata\ Medium\ 12
+set guifont=Inconsolata\ for\ Powerline\ Medium\ 9
 "
-" Powerline setup
-"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-if &t_Co >= 256 || has("gui_running")
-    let g:Powerline_symbols = 'fancy'
-endif
 
 " Insert the hours and minutes in 24- hour format for the journal
 "nnoremap <C-t> <Esc>:r! date +\%H\%M\%S<CR>A:<CR><Tab>
@@ -667,3 +667,20 @@ autocmd BufNewFile,BufReadPost *.md let g:auto_save=1
 
 " Comment boxes.
 map ,co O#=========================================================================<CR>#<CR>#========================================================================<Esc>100\|Dkk100\|DjA 
+
+" Adding rubocop support for syntatastic
+let g:syntastic_ruby_checkers = ['rubocop']
+
+" Delimit mate expand cr.  Not working for some reason.
+let delimitMate_expand_cr = 1
+
+" Powerline setup
+"set rtp+=/home/paranoidsp/.local/lib/python2.7/site-packages/powerline/bindings/vim/powerline.conf
+"set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+let g:Powerline_symbols = 'fancy'
+if &t_Co >= 256 || has("gui_running")
+    let g:Powerline_symbols = 'fancy'
+endif

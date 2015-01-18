@@ -7,24 +7,15 @@
 [submodule "vim/bundle/sparkup"]
 	path = vim/bundle/sparkup
 	url = https://github.com/rstacruz/sparkup.git
-[submodule "vim/bundle/vim-powerline"]
-	path = vim/bundle/vim-powerline
-	url = https://github.com/Lokaltog/vim-powerline.git
 [submodule "vim/bundle/closetag.vim"]
 	path = vim/bundle/closetag.vim
 	url = https://github.com/docunext/closetag.vim.git
-[submodule "vim/bundle/command-t"]
-	path = vim/bundle/command-t
-	url = https://github.com/wincent/Command-T.git
 [submodule "vim/bundle/delimilMate"]
 	path = vim/bundle/delimilMate
 	url = https://github.com/Raimondi/delimitMate.git
 [submodule "vim/bundle/gundo"]
 	path = vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
-[submodule "vim/bundle/minibufexpl"]
-	path = vim/bundle/minibufexpl
-	url = https://github.com/fholgado/minibufexpl.vim.git
 [submodule "vim/bundle/mustang"]
 	path = vim/bundle/mustang
 	url = https://github.com/croaker/mustang-vim.git
@@ -133,9 +124,6 @@
 [submodule "vim/bundle/gist-vim"]
 	path = vim/bundle/gist-vim
 	url = https://github.com/mattn/gist-vim.git
-[submodule "vim/bundle/vim/bundle/vimchat"]
-	path = vim/bundle/vim/bundle/vimchat
-	url = https://github.com/ironcamel/vimchat.git
 [submodule "vim/vim/bundle/vim-irblack"]
 	path = vim/vim/bundle/vim-irblack
 	url = https://github.com/wesgibbs/vim-irblack.git
@@ -148,9 +136,6 @@
 [submodule "vim/bundle/vim-distinguished"]
 	path = vim/bundle/vim-distinguished
 	url = https://github.com/Lokaltog/vim-distinguished.git
-[submodule "vim/bundle/vimchat"]
-	path = vim/bundle/vimchat
-	url = https://github.com/ironcamel/vimchat.git
 [submodule "vim/bundle/gruvbox"]
 	path = vim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
@@ -178,3 +163,6 @@
 [submodule "vim/bundle/vim-indent-guides"]
 	path = vim/bundle/vim-indent-guides
 	url = git://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "vim/bundle/vim-go"]
+	path = vim/bundle/vim-go
+	url = https://github.com/fatih/vim-go.git
