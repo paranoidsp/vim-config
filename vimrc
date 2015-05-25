@@ -256,7 +256,7 @@ set autoread
 "  ********************************  History stuff
 
 " remember a lot more commands
-set history=100000
+set history=1000
 
 " use many levels of undo
 set undolevels=10000
@@ -684,3 +684,4 @@ let g:Powerline_symbols = 'fancy'
 if &t_Co >= 256 || has("gui_running")
     let g:Powerline_symbols = 'fancy'
 endif
+
