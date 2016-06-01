@@ -86,7 +86,7 @@ inoremap jj <ESC>
 set tabstop=4
 
 " save on losing focus
-au FocusLost * :wa
+au BufLeave,FocusLost * silent! wall
 
 " allows backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -187,11 +187,9 @@ set formatoptions=qrnl
 set colorcolumn=85
 
 " show invisible chars
-set list
+"set list
 set listchars=tab:▸\ ,eol:¬
 
-" save on losing focus
-au FocusLost * :wa
 
 if has('gui_running')
     set background=light
