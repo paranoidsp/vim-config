@@ -328,6 +328,7 @@ nnoremap <F5> :GundoToggle<CR>
 
 " Supertab config
 let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabCrMapping = 0
 
 " Disabling toolbar and scrollbar and the menubar
 set guioptions-=T
@@ -448,7 +449,7 @@ set cpo+=J
 
 
 " Setting font. The best font ever.
-set guifont=Inconsolata\ for\ Powerline\ Medium\ 9
+set guifont=Inconsolata\ for\ Powerline\ Medium\ 10
 "
 
 " Insert the hours and minutes in 24- hour format for the journal
@@ -677,8 +678,8 @@ let delimitMate_expand_cr = 1
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
-let g:Powerline_symbols = 'fancy'
-if &t_Co >= 256 || has("gui_running")
-    let g:Powerline_symbols = 'fancy'
-endif
+"let g:Powerline_symbols = 'fancy'
+"if &t_Co >= 256 || has("gui_running")
+    "let g:Powerline_symbols = 'fancy'
+"endif
 
