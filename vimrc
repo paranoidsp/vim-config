@@ -675,9 +675,9 @@ let delimitMate_expand_cr = 1
 " Powerline setup
 "set rtp+=/home/paranoidsp/.local/lib/python2.7/site-packages/powerline/bindings/vim/powerline.conf
 "set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
 "let g:Powerline_symbols = 'fancy'
 "if &t_Co >= 256 || has("gui_running")
     "let g:Powerline_symbols = 'fancy'
