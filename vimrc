@@ -673,6 +673,7 @@ let g:syntastic_ruby_checkers = ['rubocop']
 let delimitMate_expand_cr = 1
 
 " Powerline setup
+let g:powerline_pycmd = "py3"
 "set rtp+=/home/paranoidsp/.local/lib/python2.7/site-packages/powerline/bindings/vim/powerline.conf
 "set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
 "python3 from powerline.vim import setup as powerline_setup

@@ -70,9 +70,6 @@
 [submodule "vim/bundle/vim-snippets"]
 	path = vim/bundle/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
-[submodule "vim/bundle/vim-taglist"]
-	path = vim/bundle/vim-taglist
-	url = https://github.com/vim-scripts/taglist.vim.git
 [submodule "vim/bundle/yankring"]
 	path = vim/bundle/yankring
 	url = https://github.com/vim-scripts/YankRing.vim.git
