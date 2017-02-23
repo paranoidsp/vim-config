@@ -78,7 +78,7 @@ let mapleader=","
 " Quickly edit/reload the vimrc file
 " nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-autocmd! BufWritePost vimrc :source ~/.vimrc
+autocmd! BufWritePost ~/.vimrc nested :source ~/.vimrc
 
 " This is to automatically update vimrc when it is edited.
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
@@ -449,7 +449,7 @@ set cpo+=J
 
 
 " Setting font. The best font ever.
-set guifont=Inconsolata\ for\ Powerline\ Medium\ 10
+"set guifont=Inconsolata\ for\ Powerline\ Medium\ 10
 "
 
 " Insert the hours and minutes in 24- hour format for the journal
