@@ -1,3 +1,4 @@
+" Updated to Antergos
 " This must be first, because it changes other options as side effect
 set nocompatible
 set encoding=utf-8
@@ -14,7 +15,7 @@ runtime macros/matchit.vim
 " execute pathogen#infect()
 call pathogen#infect()
 call pathogen#helptags()
-syntax on
+syntax on 
 filetype plugin indent on
 
 " Let modified buffers be hidden when abandoned.
