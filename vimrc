@@ -203,7 +203,8 @@ set colorcolumn=80
 
 " show invisible chars
 "set list
-set listchars=tab:▸\ ,eol:¬
+"set listchars=tab:▸\ ,eol:¬
+set listchars=tab:»·,trail:·
 
 
 "if has('gui_running')
@@ -356,6 +357,7 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>nc :NERDTreeTabsClose<CR>
 nnoremap <leader>m :NERDTree<CR>
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
+let g:NERDTreeWinPos = "right"
 
 " Set tabstop, softtabstop and shiftwidth to the same value
 command! -nargs=* Stab call Stab()
@@ -473,6 +475,13 @@ autocmd BufNewFile,BufRead *.journal.md inoremap <buffer> <CR> <Esc>:r! date +\%
 
 "Markdown to HTML  
 nnoremap <leader>md :%!Markdown.pl --html4tags <cr>
+" Fixing markdown detection
+au! BufRead,BufNewFile *.markdown set filetype=mkd
+au! BufRead,BufNewFile *.md       set filetype=mkd
+" Markdown code highlighting
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'haskell', 'json']
+
+
 
 
 " Ctrlp mappings.
@@ -675,11 +684,10 @@ let delimitMate_expand_cr = 1
 
 " Powerline setup
 let g:powerline_pycmd = "py3"
-"set rtp+=/home/paranoidsp/.local/lib/python2.7/site-packages/powerline/bindings/vim/powerline.conf
-"set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
-"python3 from powerline.vim import setup as powerline_setup
-"python3 powerline_setup()
-"python3 del powerline_setup
+"set rtp+=/usr/lib/python3.6/site-packages/powerline/bindings/vim/
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
 "let g:Powerline_symbols = 'fancy'
 "if &t_Co >= 256 || has("gui_running")
     "let g:Powerline_symbols = 'fancy'
