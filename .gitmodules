@@ -175,3 +175,12 @@
 [submodule "vim/bundle/vim-airline"]
 	path = vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
+[submodule "vim/bundle/vim-airline-themes"]
+	path = vim/bundle/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
+[submodule "vim/bundle/vim-colorschemes"]
+	path = vim/bundle/vim-colorschemes
+	url = https://github.com/flazz/vim-colorschemes.git
+[submodule "vim/bundle/tmuxline"]
+	path = vim/bundle/tmuxline
+	url = https://github.com/edkolev/tmuxline.vim
