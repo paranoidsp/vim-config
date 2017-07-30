@@ -15,17 +15,68 @@ runtime macros/matchit.vim
 " execute pathogen#infect()
 call pathogen#infect()
 call pathogen#helptags()
-syntax on 
+
+syntax on
 filetype plugin indent on
+
+" Install vim plug
+if !filereadable(expand('~/.vim/autoload/plug.vim'))
+  echo "Installing Vim-Plug\n"
+  execute "!" . 'curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+endif
+
+" Adding a vim-plug section for the move to Plug
+call plug#begin('~/.vim/plugged')
+
+" Easy align
+Plug 'junegunn/vim-easy-align'
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+Plug 'reinh/vim-makegreen'
+Plug 'alvan/vim-closetag'
+Plug 'Raimondi/delimitMate'
+Plug 'sjl/gundo.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'ervandew/supertab'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-surround'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-repeat'
+Plug 'airblade/vim-rooter'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'vim-scripts/Zenburn'
+Plug 'lsdr/monokai'
+Plug 'tomasr/molokai'
+Plug 'plasticboy/vim-markdown'
+Plug 'kien/ctrlp.vim'
+Plug 'mattn/gist-vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
+Plug 'bling/vim-bufferline'
+Plug 'airblade/vim-gitgutter'
+Plug 'sjl/badwolf'
+
+" Initialize plugin system
+call plug#end()
 
 " Let modified buffers be hidden when abandoned.
 set hidden
+
+" Set vim to copy to clipboard
+set clipboard=unnamedplus
 
 " Hide mouse pointer while typing
 set mousehide
 set mousemodel=popup
 
-" Better modes.  Remeber where we are, support yankring
+" Better modes.  Remember where we are, support yankring
 set viminfo=!,'10000,\"10000,%,:200000,<5000,s5000,h,@20000,'0,r/tmp,n~/.viminfo
 let g:yankring_max_history = 100000
 
@@ -45,10 +96,21 @@ set softtabstop=4
 set showmode
 set showcmd
 set wildmenu
-set wildmode=list:longest
-set ttyfast
+set wildmode=list,longest,full
 set ruler
 set laststatus=2
+set scrolloff=3
+set updatetime=250
+
+" Highlight current line
+set cursorline
+
+" Set omnicomplete function
+set omnifunc=syntaxcomplete#Complete
+
+
+" Magic on for regex
+set magic
 
 " strip all trailing spaces from a file
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
@@ -58,6 +120,7 @@ nnoremap <leader>a :Ack
 
 " sets every line number to be relative to the present. Maybe useful
 "set relativenumber
+set updatetime=250
 set number
 
 " Set persistent undo (v7.3 only)
@@ -78,8 +141,10 @@ let mapleader=","
 
 " Quickly edit/reload the vimrc file
 " nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
-autocmd! BufWritePost ~/.vimrc nested :source ~/.vimrc
+nmap <silent> <leader>sv :so ~/.vimrc<CR>
+"autocmd! BufWritePost ~/.vimrc nested :source ~/.vimrc
+autocmd!  BufWritePost ~/.vimrc nested
+        \ source ~/.vimrc | AirlineRefresh
 
 " This is to automatically update vimrc when it is edited.
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
@@ -103,6 +168,10 @@ set tabstop=4
 
 " save on losing focus
 au BufLeave,FocusLost * silent! wall
+set autowriteall " Autowrite while switching buffers or leaving vim
+
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
 
 " allows backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -124,6 +193,7 @@ set shiftround
 
 " show matching paranthesis
 set showmatch
+set noshowmatch
 
 " ignore case while searching
 set ignorecase
@@ -148,6 +218,9 @@ set pastetoggle=<F3>
 
 " enabling mouse
 set mouse=a
+if exists('$TMUX')  " Support resizing in tmux
+  set ttymouse=xterm2
+endif
 
 " mapping ; to :
 nnoremap ; :
@@ -165,6 +238,10 @@ nnoremap j gj
 nnoremap k gk
 
 " Left/Right arrow keys change buffers in all modes
+noremap <C-S-tab> <Esc>:bp<CR>
+inoremap <C-S-tab> <Esc>:bp<CR>
+nnoremap <C-S-tab> <Esc>:bp<CR>
+vnoremap <C-S-tab> <Esc>:bp<CR>
 noremap <Left> <Esc>:bp<CR>
 inoremap <Left> <Esc>:bp<CR>
 nnoremap <Left> <Esc>:bp<CR>
@@ -174,6 +251,10 @@ noremap <Right> <Esc>:bn<CR>
 inoremap <Right> <Esc>:bn<CR>
 nnoremap <Right> <Esc>:bn<CR>
 vnoremap <Right> <Esc>:bn<CR>
+noremap <C-tab> <Esc>:bn<CR>
+inoremap <C-tab> <Esc>:bn<CR>
+nnoremap <C-tab> <Esc>:bn<CR>
+vnoremap <C-tab> <Esc>:bn<CR>
 
 " settinc copy paste
 nmap <C-V> "+gP
@@ -185,6 +266,10 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 
 " use normal regexes
 nnoremap / /\v
@@ -202,10 +287,10 @@ set formatoptions=qrnl
 set colorcolumn=80
 
 " show invisible chars
-"set list
+set list
 "set listchars=tab:▸\ ,eol:¬
 set listchars=tab:»·,trail:·
-
+set listchars=tab:▸\ ,trail:·
 
 "if has('gui_running')
     "set background=light
@@ -219,7 +304,7 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 " syntax highlighting.
-if &t_Co < 256 
+if &t_Co < 256
     colorscheme solarized
 endif
 if &t_Co >= 256
@@ -227,7 +312,7 @@ if &t_Co >= 256
 endif
 if has("gui_running")
    "colorscheme blackboard
-   "colorscheme base16-default 
+   "colorscheme base16-default
    colorscheme badwolf
 endif
 
@@ -241,9 +326,9 @@ set background=dark
 
 
 " Customizing badwolf theme
-let g:badwolf_darkgutter = 1
+"let g:badwolf_darkgutter = 1
 " Make the tab line darker than the background.
-let g:badwolf_tabline = 0
+"let g:badwolf_tabline = 0
 
 " The PC is fast enough, do syntax highlight syncing from start
 "autocmd BufEnter * :syntax sync fromstart
@@ -273,7 +358,7 @@ set noerrorbells
 " No backup files
 set nobackup
 set noswapfile
-set nowritebackup 
+set nowritebackup
 
 " window behaviour.
 set winminheight=0      " Allow windows to get fully squashed
@@ -282,10 +367,10 @@ set winminheight=0      " Allow windows to get fully squashed
 " Switch between windows, maximizing the current window
 "
 map <C-J> <C-W>j<C-W>_
-map <C-K> <C-W>k<C-W>_ 
+map <C-K> <C-W>k<C-W>_
 
 " create new vertical split and move to it
-nnoremap <leader>w <C-w>v<C-w>l 
+nnoremap <leader>w <C-w>v<C-w>l
 
 " create new vertical split and move to it
 "
@@ -299,7 +384,7 @@ autocmd BufReadPost *
   \   exe "normal g`\"" |
   \ endif
 
-" setting wordwrap 
+" setting wordwrap
 set formatoptions+=l
 set lbr
 
@@ -345,17 +430,19 @@ set go-=L
 " Disable the blinking cursor.
 set gcr=a:blinkon0
 
-" Highlight current line 
+" Highlight current line
 if has("gui_running")
   set cursorline
 endif
 
+" Optimize for fast terminal connections
 set ttyfast
 
 " NERDtree on <leader>n
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>nc :NERDTreeTabsClose<CR>
 nnoremap <leader>m :NERDTree<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
 let g:NERDTreeWinPos = "right"
 
@@ -370,7 +457,7 @@ function! Stab()
   endif
   call SummarizeTabs()
 endfunction
-  
+
 function! SummarizeTabs()
   try
     echohl ModeMsg
@@ -426,12 +513,12 @@ set ssop-=folds      " do not store folds
 "au VimLeave * :call MakeSession()
 
 " tab navigation like firefox
-nnoremap <C-S-tab> :tabprevious<CR>
-nnoremap <C-tab>   :tabnext<CR>
-nnoremap <Leader>t    :tabnew<CR>
-nnoremap <leader>ct :tabclose<CR>
-inoremap <C-S-tab> <Esc>:tabprevious<CR>i
-inoremap <C-tab>   <Esc>:tabnext<CR>i
+"nnoremap <C-S-tab> :tabprevious<CR>
+"nnoremap <C-tab>   :tabnext<CR>
+"nnoremap <Leader>t    :tabnew<CR>
+"nnoremap <leader>ct :tabclose<CR>
+"inoremap <C-S-tab> <Esc>:tabprevious<CR>i
+"inoremap <C-tab>   <Esc>:tabnext<CR>i
 "inoremap <Leader>t  <Esc>:tabnew<CR>
 "let g:miniBufExplMapCTabSwitchWindows = 1
 " The above sets C-tab and C-S-Tab to shift tabs.
@@ -460,7 +547,7 @@ set cpo+=J
 "inoremap <C-t> <Esc>:r! date +\%H\%M\%S<CR>A:<CR><Tab>
 
 " Insert the time at the beginning of each line. Only for the journal.
-" Uncomment to map. 
+" Uncomment to map.
 "inoremap <CR> <Esc>:r! date +\%H\%M\%S<CR>A: \|  <Esc>i
 " Uncomment and apply the below to return to normal.
 "inoremap <CR> <CR>
@@ -473,7 +560,7 @@ set cpo+=J
 
 autocmd BufNewFile,BufRead *.journal.md inoremap <buffer> <CR> <Esc>:r! date +\%H\%M<CR>A: \|    <Esc>i
 
-"Markdown to HTML  
+"Markdown to HTML
 nnoremap <leader>md :%!Markdown.pl --html4tags <cr>
 " Fixing markdown detection
 au! BufRead,BufNewFile *.markdown set filetype=mkd
@@ -489,9 +576,10 @@ let g:ctrlp_map = '<leader>c'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*\\vendor\\**
+set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$\|^vendor'
-       
-"let g:ctrlp_user_command = 'find %s -type f' 
+
+"let g:ctrlp_user_command = 'find %s -type f'
 nnoremap <leader>ch <Esc>:CtrlP ~<CR>
 nnoremap <leader>cg <Esc>:CtrlP ~/git<CR>
 nnoremap <leader>cj <Esc>:CtrlP ~/git/lit/journal<CR>
@@ -504,102 +592,6 @@ nnoremap <C-a> <Esc>:CtrlP<CR>
 " Mapping for save file
 nnoremap <C-s> <Esc>:w<CR>
 inoremap <C-s> <Esc>:w<CR>a
-
-"---------------- Neocomplcache completion settings
-" Enable neocomplcache at startup
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-" I'm not too sure about this.
-"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ }
-    "\ 'scheme' : $HOME.'/.gosh_completions'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#smart_close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-
-" ------------------------ neosnippets config
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-
 
 " Auto refresh ctrlp when filesystem changes
 " CtrlP auto cache clearing.
@@ -617,11 +609,12 @@ if has("autocmd")
   autocmd VimEnter * :call SetupCtrlP()
 endif
 
-
 " Mapping for awesome syntax check.
 "nnoremap <Leader>a <Esc>:! awesome --check ~/.config/awesome/awesome-laptop/rc.lua <CR>
 " Mapping for save as root
 nnoremap <Leader>g <Esc>:w ! sudo tee %<CR>a<CR>L<ESC>
+cnoremap w!! %!sudo tee > /dev/null %
+
 
 " This is to enable the tabline.
 set guioptions-=e
@@ -649,7 +642,7 @@ autocmd filetype ruby set shiftwidth=2
 
 " ruby standard 2 spaces, always
 au BufRead,BufNewFile *.rb,*.rhtml set shiftwidth=2
-au BufRead,BufNewFile *.rb,*.rhtml set softtabstop=2 
+au BufRead,BufNewFile *.rb,*.rhtml set softtabstop=2
 
 " Mappings to quickly change colorschemes
 nnoremap <leader>cm <Esc>:colorscheme monokai<CR>
@@ -668,13 +661,15 @@ nnoremap <leader>csl <Esc>:set background=light<CR>
 " This is to swap caps with tilde.
 set tildeop
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufRead,BufNewFile *.md set spell
 
 " Autosave journal files.
 autocmd BufNewFile,BufReadPost *.md let g:auto_save=1
 " Not sure if it's right, but will check and edit later.
 
 " Comment boxes.
-map ,co O#=========================================================================<CR>#<CR>#========================================================================<Esc>100\|Dkk100\|DjA 
+map ,co O#=========================================================================<CR>#<CR>#========================================================================<Esc>100\|Dkk100\|DjA
 
 " Adding rubocop support for syntatastic
 let g:syntastic_ruby_checkers = ['rubocop']
@@ -685,11 +680,65 @@ let delimitMate_expand_cr = 1
 " Powerline setup
 let g:powerline_pycmd = "py3"
 "set rtp+=/usr/lib/python3.6/site-packages/powerline/bindings/vim/
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+"python3 from powerline.vim import setup as powerline_setup
+"python3 powerline_setup()
+"python3 del powerline_setup
 "let g:Powerline_symbols = 'fancy'
 "if &t_Co >= 256 || has("gui_running")
     "let g:Powerline_symbols = 'fancy'
 "endif
 
+" ----------------------------
+" vim-airline config
+" ----------------------------
+"let g:airline_powerline_fonts = 1
+"let g:airline_theme='sol'
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+let g:airline_theme='jellybeans'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 1
+let g:airline#extensions#tmuxline#snapshot_file = "~/.tmux-statusline-colors.conf"
+let g:airline_theme='bubblegum'
+let g:airline_symbols_ascii = 1
+"let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+" ---------------------------
+
+
+" Delimitmate cr expansion
+" Fixes improper autoclose of brackets when enver is pressed
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
+
+" Fix Cursor in TMUX
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" Don't copy the contents of an overwritten selection.
+vnoremap p "_dP
+
+" Bufferline should not echo to command bar
+" Works
+let g:bufferline_echo = 0
+autocmd VimEnter *
+\ let &statusline='%{bufferline#refresh_status()}'
+    \ .bufferline#get_status_string()
+
+" Highlight version control markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
