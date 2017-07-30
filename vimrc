@@ -194,7 +194,7 @@ vnoremap / /\v
 noremap <leader><space> :noh<cr>
 
 " make tab match bracket pairs instead of %
-noremap <tab> %
+"noremap <tab> %
 
 " handling long lines
 set textwidth=79
