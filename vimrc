@@ -11,11 +11,6 @@ set ambiwidth=single
 " enable extended matching for %
 runtime macros/matchit.vim
 
-" Pathogen setup
-" execute pathogen#infect()
-call pathogen#infect()
-call pathogen#helptags()
-
 syntax on
 filetype plugin indent on
 
@@ -62,6 +57,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'bling/vim-bufferline'
 Plug 'airblade/vim-gitgutter'
 Plug 'sjl/badwolf'
+Plug 'bitc/vim-hdevtools'
 
 " Initialize plugin system
 call plug#end()
