@@ -58,6 +58,7 @@ Plug 'bling/vim-bufferline'
 Plug 'airblade/vim-gitgutter'
 Plug 'sjl/badwolf'
 Plug 'bitc/vim-hdevtools'
+Plug 'Yggdroot/indentLine'
 
 " Initialize plugin system
 call plug#end()
@@ -109,7 +110,7 @@ set omnifunc=syntaxcomplete#Complete
 set magic
 
 " strip all trailing spaces from a file
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>
 
 " keymap for ack
 nnoremap <leader>a :Ack
@@ -366,7 +367,7 @@ map <C-J> <C-W>j<C-W>_
 map <C-K> <C-W>k<C-W>_
 
 " create new vertical split and move to it
-nnoremap <leader>w <C-w>v<C-w>l
+"nnoremap <leader>w <C-w>v<C-w>l
 
 " create new vertical split and move to it
 "
@@ -636,6 +637,11 @@ autocmd filetype ruby set expandtab
 autocmd filetype ruby set tabstop=2
 autocmd filetype ruby set shiftwidth=2
 
+" Indent width for javascript
+autocmd filetype javascript set expandtab
+autocmd filetype javascript set tabstop=2
+autocmd filetype javascript set shiftwidth=2
+
 " ruby standard 2 spaces, always
 au BufRead,BufNewFile *.rb,*.rhtml set shiftwidth=2
 au BufRead,BufNewFile *.rb,*.rhtml set softtabstop=2
@@ -669,6 +675,8 @@ map ,co O#======================================================================
 
 " Adding rubocop support for syntatastic
 let g:syntastic_ruby_checkers = ['rubocop']
+" Adding eslint support for syntatastic
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Delimit mate expand cr.  Not working for some reason.
 let delimitMate_expand_cr = 1
@@ -742,3 +750,13 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " Haskell dev
 au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+
+" Syntastic setup
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
