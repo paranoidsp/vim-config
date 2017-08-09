@@ -59,6 +59,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'sjl/badwolf'
 Plug 'bitc/vim-hdevtools'
 Plug 'Yggdroot/indentLine'
+Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
+Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] }
+
 
 " Initialize plugin system
 call plug#end()
