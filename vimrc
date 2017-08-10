@@ -29,8 +29,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'reinh/vim-makegreen'
 Plug 'alvan/vim-closetag'
-Plug 'Raimondi/delimitMate'
-Plug 'sjl/gundo.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'mbbill/undotree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
@@ -126,6 +126,7 @@ set number
 " Set persistent undo (v7.3 only)
 set undodir=~/.vim/undodir
 set undofile
+set undolevels=10000
 " creates an .un file to save the undo changes for later. Extremely useful
 
 " use normal regexes
@@ -344,6 +345,7 @@ set history=1000
 
 " use many levels of undo
 set undolevels=10000
+set undoreload=10000
 
 set wildignore=*.swp,*.bak,*.bckp,*.pyc,*.class
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
@@ -410,8 +412,10 @@ set lbr
 " From mnazim
 "set statusline=[%l,%v\ %P%M][CWD:\ %{CWD()}][FILE:\ %f]\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}\ %#warningmsg#%{SyntasticStatuslineFlag()}%*
 
-" Adding keybinding for gundo
-nnoremap <F5> :GundoToggle<CR>
+" Adding keybinding for UndoTree
+nnoremap <F5> :UndotreeToggle<cr>
+
+
 
 " Supertab config
 let g:SuperTabDefaultCompletionType = "context"
@@ -681,9 +685,6 @@ let g:syntastic_ruby_checkers = ['rubocop']
 " Adding eslint support for syntatastic
 let g:syntastic_javascript_checkers = ['eslint']
 
-" Delimit mate expand cr.  Not working for some reason.
-let delimitMate_expand_cr = 1
-
 " Powerline setup
 let g:powerline_pycmd = "py3"
 "set rtp+=/usr/lib/python3.6/site-packages/powerline/bindings/vim/
@@ -722,12 +723,6 @@ let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
 " ---------------------------
 
-
-" Delimitmate cr expansion
-" Fixes improper autoclose of brackets when enver is pressed
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
-
 " Fix Cursor in TMUX
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -763,3 +758,4 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
