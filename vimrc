@@ -70,7 +70,8 @@ call plug#end()
 set hidden
 
 " Set vim to copy to clipboard
-set clipboard=unnamedplus
+set clipboard^=unnamed,unnamedplus
+
 
 " Hide mouse pointer while typing
 set mousehide
@@ -257,7 +258,7 @@ inoremap <C-tab> <Esc>:bn<CR>
 nnoremap <C-tab> <Esc>:bn<CR>
 vnoremap <C-tab> <Esc>:bn<CR>
 
-" settinc copy paste
+" setting copy paste
 nmap <C-V> "+gP
 imap <C-V> <ESC><C-V>a
 vmap <C-C> "+y
@@ -724,13 +725,13 @@ let g:airline_symbols.maxlinenr = ''
 " ---------------------------
 
 " Fix Cursor in TMUX
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
+"if exists('$TMUX')
+  "let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  "let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+"else
+  "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  "let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"endif
 
 " Don't copy the contents of an overwritten selection.
 vnoremap p "_dP
