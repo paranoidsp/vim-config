@@ -57,7 +57,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'bling/vim-bufferline'
 Plug 'airblade/vim-gitgutter'
 Plug 'sjl/badwolf'
-Plug 'bitc/vim-hdevtools'
+Plug 'bitc/vim-hdevtools', {'for': ['haskell']}
 Plug 'Yggdroot/indentLine'
 Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
 Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] }
