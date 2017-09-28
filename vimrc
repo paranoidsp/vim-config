@@ -1,4 +1,4 @@
-" Updated to Antergos
+" Updated to mac
 " This must be first, because it changes other options as side effect
 set nocompatible
 set encoding=utf-8
