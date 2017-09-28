@@ -1,4 +1,5 @@
 " Updated to mac
+" Will clean up in next commit
 " This must be first, because it changes other options as side effect
 set nocompatible
 set encoding=utf-8
