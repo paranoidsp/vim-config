@@ -58,6 +58,7 @@ Plug 'bling/vim-bufferline'
 Plug 'airblade/vim-gitgutter'
 Plug 'sjl/badwolf'
 Plug 'bitc/vim-hdevtools', {'for': ['haskell']}
+Plug 'tarekbecker/vim-yaml-formatter', {'for': ['yaml']}
 Plug 'Yggdroot/indentLine'
 Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
 Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] }
@@ -154,7 +155,9 @@ nnoremap <leader>ej <C-w><C-v><C-l>:!gvims $journal<cr>
 nnoremap <leader>ea <C-w><C-v><C-l>:e ~/.config/awesome/awesome-laptop/rc.lua<cr>
 
 " mapping jj to esc
-inoremap jj <ESC>
+"inoremap jj <ESC>
+" mapping fd to esc
+inoremap fd <ESC>
 
 " Setting line number
 "set number
@@ -262,6 +265,9 @@ vnoremap <C-tab> <Esc>:bn<CR>
 nmap <C-V> "+gP
 imap <C-V> <ESC><C-V>a
 vmap <C-C> "+y
+noremap <Leader>p "0p
+noremap <Leader>P "0P
+vnoremap <Leader>p "0p
 
 " Easy window navigation
 map <C-h> <C-w>h
@@ -284,7 +290,7 @@ noremap <leader><space> :noh<cr>
 "noremap <tab> %
 
 " handling long lines
-set textwidth=79
+"set textwidth=79
 set formatoptions=qrnl
 set colorcolumn=80
 
@@ -582,7 +588,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*\\vendor\\**
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$\|^vendor'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|\v[\/]\.(git|hg|svn)$\|^vendor'
 
 "let g:ctrlp_user_command = 'find %s -type f'
 nnoremap <leader>ch <Esc>:CtrlP ~<CR>
@@ -597,6 +603,7 @@ nnoremap <C-a> <Esc>:CtrlP<CR>
 " Mapping for save file
 nnoremap <C-s> <Esc>:w<CR>
 inoremap <C-s> <Esc>:w<CR>a
+nnoremap <space>fs <Esc>:w<CR>
 
 " Auto refresh ctrlp when filesystem changes
 " CtrlP auto cache clearing.
