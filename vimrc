@@ -63,7 +63,9 @@ Plug 'tarekbecker/vim-yaml-formatter', {'for': ['yaml']}
 Plug 'Yggdroot/indentLine'
 Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
 Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] }
-
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'ujihisa/unite-colorscheme'
+Plug 'godlygeek/csapprox'
 
 " Initialize plugin system
 call plug#end()
@@ -131,6 +133,9 @@ set undodir=~/.vim/undodir
 set undofile
 set undolevels=10000
 " creates an .un file to save the undo changes for later. Extremely useful
+
+
+set display=lastline    " Show as much as possible of a wrapped last line, not just "@".
 
 " use normal regexes
 noremap / /\v
@@ -314,15 +319,15 @@ endif
 
 " syntax highlighting.
 if &t_Co < 256
-    colorscheme solarized
+    colorscheme onedark
 endif
 if &t_Co >= 256
-    colorscheme solarized
+    colorscheme onedark
 endif
 if has("gui_running")
    "colorscheme blackboard
    "colorscheme base16-default
-   colorscheme badwolf
+   colorscheme solarized
 endif
 
 let g:solarized_termtrans=1
@@ -458,34 +463,6 @@ nnoremap <leader>f :NERDTreeFind<CR>
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
 let g:NERDTreeWinPos = "right"
 
-" Set tabstop, softtabstop and shiftwidth to the same value
-command! -nargs=* Stab call Stab()
-function! Stab()
-  let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
-  if l:tabstop > 0
-    let &l:sts = l:tabstop
-    let &l:ts = l:tabstop
-    let &l:sw = l:tabstop
-  endif
-  call SummarizeTabs()
-endfunction
-
-function! SummarizeTabs()
-  try
-    echohl ModeMsg
-    echon 'tabstop='.&l:ts
-    echon ' shiftwidth='.&l:sw
-    echon ' softtabstop='.&l:sts
-    if &l:et
-      echon ' expandtab'
-    else
-      echon ' noexpandtab'
-    endif
-  finally
-    echohl None
-  endtry
-endfunction
-
 
 " mapping to toggle lists
 nmap <leader>l :set list<CR>
@@ -500,40 +477,6 @@ au Syntax * RainbowParenthesesLoadBraces
 
 set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
-
-"" Automatic save/load sessions
-"function! MakeSession()
-  "let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
-  "if (filewritable(b:sessiondir) != 2)
-    "exe 'silent !mkdir -p ' b:sessiondir
-    "redraw!
-  "endif
-  "let b:filename = b:sessiondir . '/session.vim'
-  "exe "mksession! " . b:filename
-"endfunction
-
-"function! LoadSession()
-  "let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
-  "let b:sessionfile = b:sessiondir . "/session.vim"
-  "if (filereadable(b:sessionfile))
-    "exe 'source ' b:sessionfile
-  "else
-    "echo "No session loaded."
-  "endif
-"endfunction
-"au VimEnter * nested :call LoadSession()
-"au VimLeave * :call MakeSession()
-
-" tab navigation like firefox
-"nnoremap <C-S-tab> :tabprevious<CR>
-"nnoremap <C-tab>   :tabnext<CR>
-"nnoremap <Leader>t    :tabnew<CR>
-"nnoremap <leader>ct :tabclose<CR>
-"inoremap <C-S-tab> <Esc>:tabprevious<CR>i
-"inoremap <C-tab>   <Esc>:tabnext<CR>i
-"inoremap <Leader>t  <Esc>:tabnew<CR>
-"let g:miniBufExplMapCTabSwitchWindows = 1
-" The above sets C-tab and C-S-Tab to shift tabs.
 
 " Insert new line without entering insert mode.
 map <S-Enter> O<Esc>j
@@ -578,10 +521,10 @@ nnoremap <leader>md :%!Markdown.pl --html4tags <cr>
 au! BufRead,BufNewFile *.markdown set filetype=mkd
 au! BufRead,BufNewFile *.md       set filetype=mkd
 " Markdown code highlighting
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'haskell', 'json']
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'haskell']
 
-
-
+" Vim markdown concealing
+" let g:vim_markdown_conceal = 0
 
 " Ctrlp mappings.
 let g:ctrlp_map = '<leader>c'
@@ -705,6 +648,7 @@ let g:powerline_pycmd = "py3"
     "let g:Powerline_symbols = 'fancy'
 "endif
 
+
 " ----------------------------
 " vim-airline config
 " ----------------------------
@@ -713,12 +657,15 @@ let g:powerline_pycmd = "py3"
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
   endif
-let g:airline_theme='jellybeans'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#bufferline#enabled = 1
-let g:airline#extensions#tmuxline#enabled = 1
-let g:airline#extensions#tmuxline#snapshot_file = "~/.tmux-statusline-colors.conf"
-let g:airline_theme='bubblegum'
+let g:airline#extensions#tmuxline#enabled = 0
+let g:airline#extensions#tmuxline#snapshot_file = "~/.tmuxline-color.conf"
+"let g:airline_theme='cobalt'
+"let g:airline_theme='zenburn'
+"let g:airline_theme='papercolor'
+"let g:airline_theme='papercolor'
+let g:airline_theme='zenburn'
 let g:airline_symbols_ascii = 1
 "let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.maxlinenr = ''
@@ -767,4 +714,3 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
