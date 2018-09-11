@@ -1,3 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/home/psp/git/system-config/gen-scripts/scripts'
+let g:netrw_dirhist_2='/home/psp/work/controller/danava-controller/admission'
+let g:netrw_dirhist_3='/home/psp/.gvm/pkgsets/go1.8/global/src/github.com/hasura/danava/aws/test'
+let g:netrw_dirhist_4='/home/psp/work/graphql-bench-prisma/testcandidates/hasura/queries'
+let g:netrw_dirhist_5='/home/psp/work/graphql-bench-prisma/testcandidates/postgraphile/import'
+let g:netrw_dirhist_6='/home/psp/work/graphql-bench-prisma/testcandidates/prisma/serversetup'
