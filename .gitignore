@@ -2,3 +2,6 @@ vim/undodir/*
 vim/sessions/*
 vim/plugged/*
 tmux*.log
+vim/undo-dir
+vim/backup
+vim/views
