@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/home/paranoidsp/git/system-config/vim/.vim'
 let g:netrw_dirhist_2='/home/paranoidsp/.config/herbstluftwm'
 let g:netrw_dirhist_3='/home/paranoidsp/.offlineimap'
+let g:netrw_dirhist_4='/Library/LaunchDaemons'
+let g:netrw_dirhist_5='/Users/karvi/Library/Preferences'
