@@ -11,8 +11,11 @@
     # set spacevim theme. by default colorscheme layer is not loaded,
     # if you want to use more colorscheme, please load the colorscheme
     # layer
-    colorscheme = "onedark"
-    # colorscheme_bg = "dark"
+    sonokai_style = 'andromeda'
+    sonokai_enable_italic = 1
+    sonokai_disable_italic_comment = 1
+    colorscheme = "sonokai"
+    colorscheme_bg = "dark"
     # colorscheme = "hybrid"
     # Disable guicolors in basic mode, many terminal do not support 24bit
     # true colors
@@ -68,6 +71,9 @@
   name = "lang#ruby"
 
 [[layers]]
+  name = "lang#haskell"
+
+[[layers]]
   name = "tools#dash"
 
 [[layers]]
@@ -94,3 +100,14 @@
 [[custom_plugins]]
  name = 'tweekmonster/startuptime.vim'
  merged = 0
+
+
+# Adding some colorschemes
+[[custom_plugins]]
+  name = 'rafi/awesome-vim-colorschemes.git'
+  merged = 0
+
+[[custom_plugins]]
+  name = 'arzg/vim-colors-xcode.git'
+  merged = 0
+  
